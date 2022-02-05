@@ -5,6 +5,9 @@ module.exports = {
     browser: true,
     es6: true,
   },
+  globals: {
+    route: true,
+  },
   extends: ["plugin:react/recommended", "eslint:recommended", "prettier"],
   parserOptions: {
     ecmaFeatures: {
