@@ -10,31 +10,78 @@ import Label from "@/Components/Breeze/Label";
 import ValidationErrors from "@/Components/Breeze/ValidationErrors";
 import { default as ButtonBlack } from "@/Components/Breeze/Button";
 
+const ClientModal = ({ data, errors, submit, setData, processing }) => {
+  const ref = React.useRef(null);
+
+  function onSubmit(e) {
+    submit(e);
+    ref.current.hideModal();
+  }
+
+  return (
+    <Modal title={"Add Client"} ref={ref}>
+      <div className="border-t border-gray-300">
+        <form className="space-y-2" onSubmit={onSubmit}>
+          <ValidationErrors errors={errors} />
+          <Label forInput={"company"}>Company</Label>
+          <Input
+            name={"company"}
+            value={data.company}
+            required={true}
+            handleChange={(e) => setData("company", e.target.value)}
+            className={"w-full"}
+          />
+          <Label forInput={"vat"}>VAT</Label>
+          <Input
+            name={"vat"}
+            value={data.vat}
+            required={true}
+            handleChange={(e) => setData("vat", e.target.value)}
+            className={"w-full"}
+          />
+          <Label forInput={"address"}>Address</Label>
+          <Input
+            name={"address"}
+            value={data.address}
+            required={true}
+            handleChange={(e) => setData("address", e.target.value)}
+            className={"w-full"}
+          />
+          <ButtonBlack className={processing ?? "disabled"}>Submit</ButtonBlack>
+        </form>
+      </div>
+    </Modal>
+  );
+};
+
 export default function Clients({ auth, errors, clients }) {
-  const {
-    data,
-    setData,
-    post,
-    delete: destroy,
-    reset,
-    processing,
-  } = useForm({
+  const { delete: destroy } = useForm();
+  const [modalData, setModalData] = React.useState({});
+  const [isEditing, setisEditing] = React.useState(false);
+  const { data, setData, post, reset, processing } = useForm({
     company: "",
     vat: "",
     address: "",
   });
-  const ref = React.useRef(null);
 
-  function submit(e) {
+  function addClient(e) {
     e.preventDefault();
     post(route("clients.store"), {
       preserveScroll: true,
       onSuccess: () => {
         console.log("success!");
         reset(...Object.keys(data));
-        ref.current.hideModal();
       },
     });
+  }
+
+  function submit(e) {
+    switch (isEditing) {
+      case true:
+        return console.log("is editing");
+      case false:
+        addClient(e);
+    }
   }
 
   return (
@@ -51,40 +98,13 @@ export default function Clients({ auth, errors, clients }) {
 
       <div className="py-12">
         <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
-          <Modal title={"Add Client"} ref={ref}>
-            <div className="border-t border-gray-300">
-              <form className="space-y-2" onSubmit={submit}>
-                <ValidationErrors errors={errors} />
-                <Label forInput={"company"}>Company</Label>
-                <Input
-                  name={"company"}
-                  value={data.company}
-                  required={true}
-                  handleChange={(e) => setData("company", e.target.value)}
-                  className={"w-full"}
-                />
-                <Label forInput={"vat"}>VAT</Label>
-                <Input
-                  name={"vat"}
-                  value={data.vat}
-                  required={true}
-                  handleChange={(e) => setData("vat", e.target.value)}
-                  className={"w-full"}
-                />
-                <Label forInput={"address"}>Address</Label>
-                <Input
-                  name={"address"}
-                  value={data.address}
-                  required={true}
-                  handleChange={(e) => setData("address", e.target.value)}
-                  className={"w-full"}
-                />
-                <ButtonBlack className={processing ?? "disabled"}>
-                  Submit
-                </ButtonBlack>
-              </form>
-            </div>
-          </Modal>
+          <ClientModal
+            errors={errors}
+            data={modalData}
+            processing={processing}
+            submit={submit}
+            setData={setData}
+          />
 
           <div className="bg-white shadow-sm">
             <Table.Main title="Client List">

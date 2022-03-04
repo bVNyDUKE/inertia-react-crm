@@ -8,6 +8,7 @@ const Modal = forwardRef(({ children, title }, ref) => {
   useImperativeHandle(ref, () => {
     return {
       hideModal: () => setisOpen(false),
+      showModal: () => setisOpen(true),
     };
   });
 
