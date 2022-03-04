@@ -57,7 +57,14 @@ class ClientController extends Controller
      */
     public function update(Request $request, Client $client)
     {
-        //
+        $client->update($request->validate([
+            'company' => ['required', 'max:255'],
+            'vat' => ['required', 'max:50'],
+            'address' => ['required', 'max:255'],
+        ]
+        ));
+
+        return redirect()->route('clients.index');
     }
 
     /**

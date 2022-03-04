@@ -10,16 +10,31 @@ import Label from "@/Components/Breeze/Label";
 import ValidationErrors from "@/Components/Breeze/ValidationErrors";
 import { default as ButtonBlack } from "@/Components/Breeze/Button";
 
-const ClientModal = ({ data, errors, submit, setData, processing }) => {
+const ClientModal = ({
+  data,
+  errors,
+  submit,
+  setData,
+  processing,
+  isEditing,
+  setisEditing,
+}) => {
   const ref = React.useRef(null);
 
-  function onSubmit(e) {
+  React.useEffect(() => isEditing && ref.current.showModal(), [isEditing]);
+
+  const onSubmit = (e) => {
     submit(e);
     ref.current.hideModal();
-  }
+  };
+
+  const afterLeave = () => {
+    setData({});
+    setisEditing(false);
+  };
 
   return (
-    <Modal title={"Add Client"} ref={ref}>
+    <Modal title={"Add Client"} ref={ref} afterLeave={afterLeave}>
       <div className="border-t border-gray-300">
         <form className="space-y-2" onSubmit={onSubmit}>
           <ValidationErrors errors={errors} />
@@ -56,15 +71,24 @@ const ClientModal = ({ data, errors, submit, setData, processing }) => {
 
 export default function Clients({ auth, errors, clients }) {
   const { delete: destroy } = useForm();
-  const [modalData, setModalData] = React.useState({});
   const [isEditing, setisEditing] = React.useState(false);
-  const { data, setData, post, reset, processing } = useForm({
+  const { data, setData, post, patch, reset, processing } = useForm({
     company: "",
     vat: "",
     address: "",
   });
 
-  function addClient(e) {
+  const openEditModal = (client) => {
+    setData({
+      id: client.id,
+      company: client.company,
+      vat: client.vat,
+      address: client.address,
+    });
+    setisEditing(true);
+  };
+
+  const addClient = (e) => {
     e.preventDefault();
     post(route("clients.store"), {
       preserveScroll: true,
@@ -73,14 +97,27 @@ export default function Clients({ auth, errors, clients }) {
         reset(...Object.keys(data));
       },
     });
-  }
+  };
+
+  const updateClient = (e) => {
+    e.preventDefault();
+    patch(route("clients.update", data.id), {
+      preserveScroll: true,
+      onSuccess: () => {
+        console.log("updated client");
+        reset(...Object.keys(data));
+      },
+    });
+  };
 
   function submit(e) {
     switch (isEditing) {
       case true:
-        return console.log("is editing");
+        updateClient(e);
+        break;
       case false:
         addClient(e);
+        break;
     }
   }
 
@@ -100,10 +137,12 @@ export default function Clients({ auth, errors, clients }) {
         <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
           <ClientModal
             errors={errors}
-            data={modalData}
+            data={data}
             processing={processing}
             submit={submit}
             setData={setData}
+            isEditing={isEditing}
+            setisEditing={setisEditing}
           />
 
           <div className="bg-white shadow-sm">
@@ -117,7 +156,10 @@ export default function Clients({ auth, errors, clients }) {
                     <Table.Cell data={client.address} />
                     <Table.Cell>
                       {" "}
-                      <Button label="Edit" />{" "}
+                      <Button
+                        label="Edit"
+                        onClick={() => openEditModal(client)}
+                      />{" "}
                       <Button
                         color="red"
                         label="Delete"
