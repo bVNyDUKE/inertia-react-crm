@@ -1,0 +1,4 @@
+.prettierignore
+composer.json
+package.json
+resources/js/ziggy.js

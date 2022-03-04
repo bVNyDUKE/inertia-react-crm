@@ -1,5 +1,5 @@
 import React from "react";
-import Dropdown from "@/Components/Dropdown";
+import Dropdown from "@/Components/Breeze/Dropdown";
 
 function XUserDropdown({ auth }) {
   return (

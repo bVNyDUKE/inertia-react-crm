@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import ResponsiveNavLink from "@/Components/ResponsiveNavLink";
-import XApplicationLogo from "@/Components/XApplicationLogo";
-import XUserDropdown from "../Components/XUserDropdown";
+import ResponsiveNavLink from "@/Components/Breeze/ResponsiveNavLink";
+import XApplicationLogo from "@/Components/CRM/XApplicationLogo";
+import XUserDropdown from "@/Components/CRM/XUserDropdown";
 
 export default function Authenticated({ auth, header, children }) {
   const [showingNavigationDropdown, setShowingNavigationDropdown] =
@@ -13,12 +13,15 @@ export default function Authenticated({ auth, header, children }) {
         <XApplicationLogo />
         <XUserDropdown auth={auth} />
 
-        <div className="hidden w-full sm:flex">
-          <ResponsiveNavLink
-            href={route("dashboard")}
-            active={route().current("dashboard")}
-          >
+        <div className="hidden w-full sm:flex flex-col space-y-2">
+          <ResponsiveNavLink href="/" active={route().current("dashboard")}>
             Dashboard
+          </ResponsiveNavLink>
+          <ResponsiveNavLink
+            href={route("clients.index")}
+            active={route().current("clients.index")}
+          >
+            Clients
           </ResponsiveNavLink>
         </div>
 
