@@ -14,4 +14,9 @@ class Client extends Model
         'vat',
         'address'
     ];
+
+    protected $hidden = [
+        'created_at',
+        'updated_at'
+    ];
 }

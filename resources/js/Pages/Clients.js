@@ -5,6 +5,7 @@ import Authenticated from "@/Layouts/Authenticated";
 import Table from "@/Components/CRM/Table";
 import Modal from "@/Components/CRM/Modal";
 import Button from "@/Components/CRM/Button";
+import Pagination from "@/Components/CRM/Pagination";
 import Input from "@/Components/Breeze/Input";
 import Label from "@/Components/Breeze/Label";
 import ValidationErrors from "@/Components/Breeze/ValidationErrors";
@@ -149,7 +150,7 @@ export default function Clients({ auth, errors, clients }) {
             <Table.Main title="Client List">
               <Table.Head headers={["Company", "VAT", "Address", ""]} />
               <Table.Body>
-                {clients.map((client, index) => (
+                {clients.data.map((client, index) => (
                   <Table.Row key={client.id} stripped={index % 2 === 0}>
                     <Table.Cell data={client.company} />
                     <Table.Cell data={client.vat} />
@@ -172,6 +173,7 @@ export default function Clients({ auth, errors, clients }) {
                 ))}
               </Table.Body>
             </Table.Main>
+            <Pagination links={clients} />
           </div>
         </div>
       </div>
