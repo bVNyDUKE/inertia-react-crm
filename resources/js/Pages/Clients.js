@@ -11,15 +11,7 @@ import Label from "@/Components/Breeze/Label";
 import ValidationErrors from "@/Components/Breeze/ValidationErrors";
 import { default as ButtonBlack } from "@/Components/Breeze/Button";
 
-const ClientModal = ({
-  data,
-  errors,
-  submit,
-  setData,
-  processing,
-  isEditing,
-  setisEditing,
-}) => {
+const ClientModal = ({ data, errors, submit, setData, processing, isEditing, setisEditing }) => {
   const ref = React.useRef(null);
 
   React.useEffect(() => isEditing && ref.current.showModal(), [isEditing]);
@@ -40,29 +32,11 @@ const ClientModal = ({
         <form className="space-y-2" onSubmit={onSubmit}>
           <ValidationErrors errors={errors} />
           <Label forInput={"company"}>Company</Label>
-          <Input
-            name={"company"}
-            value={data.company}
-            required={true}
-            handleChange={(e) => setData("company", e.target.value)}
-            className={"w-full"}
-          />
+          <Input name={"company"} value={data.company} required={true} handleChange={(e) => setData("company", e.target.value)} className={"w-full"} />
           <Label forInput={"vat"}>VAT</Label>
-          <Input
-            name={"vat"}
-            value={data.vat}
-            required={true}
-            handleChange={(e) => setData("vat", e.target.value)}
-            className={"w-full"}
-          />
+          <Input name={"vat"} value={data.vat} required={true} handleChange={(e) => setData("vat", e.target.value)} className={"w-full"} />
           <Label forInput={"address"}>Address</Label>
-          <Input
-            name={"address"}
-            value={data.address}
-            required={true}
-            handleChange={(e) => setData("address", e.target.value)}
-            className={"w-full"}
-          />
+          <Input name={"address"} value={data.address} required={true} handleChange={(e) => setData("address", e.target.value)} className={"w-full"} />
           <ButtonBlack className={processing ?? "disabled"}>Submit</ButtonBlack>
         </form>
       </div>
@@ -123,28 +97,12 @@ export default function Clients({ auth, errors, clients }) {
   }
 
   return (
-    <Authenticated
-      auth={auth}
-      errors={errors}
-      header={
-        <h2 className="font-semibold text-xl text-gray-800 leading-tight">
-          Clients
-        </h2>
-      }
-    >
+    <Authenticated auth={auth} errors={errors} header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Clients</h2>}>
       <Head title="Clients" />
 
       <div className="py-12">
         <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
-          <ClientModal
-            errors={errors}
-            data={data}
-            processing={processing}
-            submit={submit}
-            setData={setData}
-            isEditing={isEditing}
-            setisEditing={setisEditing}
-          />
+          <ClientModal errors={errors} data={data} processing={processing} submit={submit} setData={setData} isEditing={isEditing} setisEditing={setisEditing} />
 
           <div className="bg-white shadow-sm">
             <Table.Main title="Client List">
@@ -157,23 +115,13 @@ export default function Clients({ auth, errors, clients }) {
                     <Table.Cell data={client.address} />
                     <Table.Cell>
                       {" "}
-                      <Button
-                        label="Edit"
-                        onClick={() => openEditModal(client)}
-                      />{" "}
-                      <Button
-                        color="red"
-                        label="Delete"
-                        onClick={() =>
-                          destroy(route("clients.destroy", client.id))
-                        }
-                      />
+                      <Button label="Edit" onClick={() => openEditModal(client)} /> <Button color="red" label="Delete" onClick={() => destroy(route("clients.destroy", client.id))} />
                     </Table.Cell>
                   </Table.Row>
                 ))}
               </Table.Body>
             </Table.Main>
-            <Pagination links={clients} />
+            <Pagination paginator={clients} />
           </div>
         </div>
       </div>

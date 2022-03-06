@@ -46,7 +46,7 @@ function Main(props) {
   return (
     <>
       <div className="p-3 mb-3 border-b border-gray-300">{props.title}</div>
-      <div className="mx-2 my-4 p-2">
+      <div className="mx-2 mt-4 mb-2 p-2">
         <table className="table table-auto w-full border-collapse text-sm">
           {props.children}
         </table>
