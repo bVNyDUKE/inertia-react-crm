@@ -11,18 +11,23 @@ import Label from "@/Components/Breeze/Label";
 import ValidationErrors from "@/Components/Breeze/ValidationErrors";
 import { default as ButtonBlack } from "@/Components/Breeze/Button";
 
-const ClientModal = ({ data, errors, submit, setData, processing, isEditing, setisEditing }) => {
+const ClientModal = ({ form, errors, submit, isEditing, setisEditing }) => {
   const ref = React.useRef(null);
 
   React.useEffect(() => isEditing && ref.current.showModal(), [isEditing]);
 
   const onSubmit = (e) => {
+    e.preventDefault();
     submit(e);
     ref.current.hideModal();
   };
 
+  const handleInputChange = (e) => {
+    form.setData(e.target.name, e.target.value);
+  };
+
   const afterLeave = () => {
-    setData({});
+    form.reset(...Object.keys(form.data));
     setisEditing(false);
   };
 
@@ -32,12 +37,12 @@ const ClientModal = ({ data, errors, submit, setData, processing, isEditing, set
         <form className="space-y-2" onSubmit={onSubmit}>
           <ValidationErrors errors={errors} />
           <Label forInput={"company"}>Company</Label>
-          <Input name={"company"} value={data.company} required={true} handleChange={(e) => setData("company", e.target.value)} className={"w-full"} />
+          <Input name={"company"} value={form.data.company} required={true} handleChange={handleInputChange} className={"w-full"} />
           <Label forInput={"vat"}>VAT</Label>
-          <Input name={"vat"} value={data.vat} required={true} handleChange={(e) => setData("vat", e.target.value)} className={"w-full"} />
+          <Input name={"vat"} value={form.data.vat} required={true} handleChange={handleInputChange} className={"w-full"} />
           <Label forInput={"address"}>Address</Label>
-          <Input name={"address"} value={data.address} required={true} handleChange={(e) => setData("address", e.target.value)} className={"w-full"} />
-          <ButtonBlack className={processing ?? "disabled"}>Submit</ButtonBlack>
+          <Input name={"address"} value={form.data.address} required={true} handleChange={handleInputChange} className={"w-full"} />
+          <ButtonBlack className={form.processing ?? "disabled"}>Submit</ButtonBlack>
         </form>
       </div>
     </Modal>
@@ -45,16 +50,27 @@ const ClientModal = ({ data, errors, submit, setData, processing, isEditing, set
 };
 
 export default function Clients({ auth, errors, clients }) {
-  const { delete: destroy } = useForm();
   const [isEditing, setisEditing] = React.useState(false);
-  const { data, setData, post, patch, reset, processing } = useForm({
-    company: "",
-    vat: "",
-    address: "",
-  });
+
+  const createForm = useForm({ company: "", vat: "", address: "" });
+  const editForm = useForm({});
+
+  const [modalForm, setModalForm] = React.useState(createForm);
+  const [modalSubmit, setModalSubmit] = React.useState("");
+
+  React.useEffect(() => {
+    if (isEditing) {
+      setModalForm(editForm);
+      setModalSubmit(() => updateClient);
+      return;
+    }
+
+    setModalForm(createForm);
+    setModalSubmit(() => addClient);
+  }, [isEditing, editForm.data, createForm.data]);
 
   const openEditModal = (client) => {
-    setData({
+    editForm.setData({
       id: client.id,
       company: client.company,
       vat: client.vat,
@@ -63,38 +79,17 @@ export default function Clients({ auth, errors, clients }) {
     setisEditing(true);
   };
 
-  const addClient = (e) => {
-    e.preventDefault();
-    post(route("clients.store"), {
+  const addClient = () => {
+    createForm.post(route("clients.store"), {
       preserveScroll: true,
-      onSuccess: () => {
-        console.log("success!");
-        reset(...Object.keys(data));
-      },
     });
   };
 
-  const updateClient = (e) => {
-    e.preventDefault();
-    patch(route("clients.update", data.id), {
+  const updateClient = () => {
+    editForm.patch(route("clients.update", editForm.data.id), {
       preserveScroll: true,
-      onSuccess: () => {
-        console.log("updated client");
-        reset(...Object.keys(data));
-      },
     });
   };
-
-  function submit(e) {
-    switch (isEditing) {
-      case true:
-        updateClient(e);
-        break;
-      case false:
-        addClient(e);
-        break;
-    }
-  }
 
   return (
     <Authenticated auth={auth} errors={errors} header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Clients</h2>}>
@@ -102,7 +97,7 @@ export default function Clients({ auth, errors, clients }) {
 
       <div className="py-12">
         <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
-          <ClientModal errors={errors} data={data} processing={processing} submit={submit} setData={setData} isEditing={isEditing} setisEditing={setisEditing} />
+          <ClientModal errors={errors} form={modalForm} submit={modalSubmit} isEditing={isEditing} setisEditing={setisEditing} />
 
           <div className="bg-white shadow-sm">
             <Table.Main title="Client List">
@@ -115,7 +110,7 @@ export default function Clients({ auth, errors, clients }) {
                     <Table.Cell data={client.address} />
                     <Table.Cell>
                       {" "}
-                      <Button label="Edit" onClick={() => openEditModal(client)} /> <Button color="red" label="Delete" onClick={() => destroy(route("clients.destroy", client.id))} />
+                      <Button label="Edit" onClick={() => openEditModal(client)} /> <Button color="red" label="Delete" onClick={() => createForm.destroy(route("clients.destroy", client.id))} />
                     </Table.Cell>
                   </Table.Row>
                 ))}

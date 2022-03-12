@@ -4,15 +4,7 @@ import { Head } from "@inertiajs/inertia-react";
 
 export default function Dashboard({ auth, errors }) {
   return (
-    <Authenticated
-      auth={auth}
-      errors={errors}
-      header={
-        <h2 className="font-semibold text-xl text-gray-800 leading-tight">
-          Dashboard
-        </h2>
-      }
-    >
+    <Authenticated auth={auth} errors={errors} header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Dashboard</h2>}>
       <Head title="Dashboard" />
 
       <div className="py-12">
