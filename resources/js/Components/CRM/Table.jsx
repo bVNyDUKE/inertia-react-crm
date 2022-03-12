@@ -1,11 +1,7 @@
 import React from "react";
 
 function HeaderCell({ data }) {
-  return (
-    <th className="p-2 pb-3 bg-gray-800 text-white font-bold text-left table-cell">
-      {data}
-    </th>
-  );
+  return <th className="p-2 pb-3 bg-gray-800 text-white font-bold text-left table-cell">{data}</th>;
 }
 
 function Head({ headers }) {
@@ -26,11 +22,7 @@ function Body(props) {
 
 function Row(props) {
   const baseStyle = "border-b border-t border-gray-300";
-  return (
-    <tr className={`${baseStyle} ${props.stripped ? "bg-gray-200" : ""}`}>
-      {props.children}
-    </tr>
-  );
+  return <tr className={`${baseStyle} ${props.stripped ? "bg-gray-200" : ""}`}>{props.children}</tr>;
 }
 
 function Cell({ data, children }) {
@@ -47,9 +39,7 @@ function Main(props) {
     <>
       <div className="p-3 mb-3 border-b border-gray-300">{props.title}</div>
       <div className="mx-2 mt-4 mb-2 p-2">
-        <table className="table table-auto w-full border-collapse text-sm">
-          {props.children}
-        </table>
+        <table className="table table-auto w-full border-collapse text-sm">{props.children}</table>
       </div>
     </>
   );

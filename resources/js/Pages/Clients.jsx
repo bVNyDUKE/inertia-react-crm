@@ -95,8 +95,8 @@ export default function Clients({ auth, errors, clients }) {
     <Authenticated auth={auth} errors={errors} header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Clients</h2>}>
       <Head title="Clients" />
 
-      <div className="py-12">
-        <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
+      <div className="p-8 lg:px-14">
+        <div className="mx-auto">
           <ClientModal errors={errors} form={modalForm} submit={modalSubmit} isEditing={isEditing} setisEditing={setisEditing} />
 
           <div className="bg-white shadow-sm">
@@ -110,7 +110,8 @@ export default function Clients({ auth, errors, clients }) {
                     <Table.Cell data={client.address} />
                     <Table.Cell>
                       {" "}
-                      <Button label="Edit" onClick={() => openEditModal(client)} /> <Button color="red" label="Delete" onClick={() => createForm.destroy(route("clients.destroy", client.id))} />
+                      <Button label="Edit" onClick={() => openEditModal(client)} />{" "}
+                      <Button color="red" label="Delete" onClick={() => createForm.destroy(route("clients.destroy", client.id))} />
                     </Table.Cell>
                   </Table.Row>
                 ))}
