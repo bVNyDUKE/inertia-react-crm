@@ -109,7 +109,6 @@ export default function Clients({ auth, errors, clients }) {
                     <Table.Cell data={client.vat} />
                     <Table.Cell data={client.address} />
                     <Table.Cell>
-                      {" "}
                       <Button label="Edit" onClick={() => openEditModal(client)} />{" "}
                       <Button color="red" label="Delete" onClick={() => createForm.destroy(route("clients.destroy", client.id))} />
                     </Table.Cell>
