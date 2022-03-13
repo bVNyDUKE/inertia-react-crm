@@ -103,8 +103,8 @@ export default function Clients({ auth, errors, clients }) {
             <Table.Main title="Client List">
               <Table.Head headers={["Company", "VAT", "Address", ""]} />
               <Table.Body>
-                {clients.data.map((client, index) => (
-                  <Table.Row key={client.id} stripped={index % 2 === 0}>
+                {clients.data.map((client) => (
+                  <Table.Row key={client.id}>
                     <Table.Cell data={client.company} />
                     <Table.Cell data={client.vat} />
                     <Table.Cell data={client.address} />

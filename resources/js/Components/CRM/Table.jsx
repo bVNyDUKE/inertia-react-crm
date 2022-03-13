@@ -21,8 +21,7 @@ function Body(props) {
 }
 
 function Row(props) {
-  const baseStyle = "border-b border-t border-gray-300";
-  return <tr className={`${baseStyle} ${props.stripped ? "bg-gray-200" : ""}`}>{props.children}</tr>;
+  return <tr className={`border-b border-t border-gray-300 odd:bg-white even:bg-slate-100`}>{props.children}</tr>;
 }
 
 function Cell({ data, children }) {
