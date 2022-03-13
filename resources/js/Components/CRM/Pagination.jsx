@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "@inertiajs/inertia-react";
 
 function Pagination({ paginator }) {
-  const { from, to, links: allLinks, prev_page_url: previous, next_page_url: next } = paginator;
+  const { from, to, links: allLinks, prev_page_url: previous, next_page_url: next, total } = paginator;
 
   const links = allLinks.filter((link) => !link.label.includes("Previous") && !link.label.includes("Next"));
 
@@ -16,7 +16,7 @@ function Pagination({ paginator }) {
             to
             <span className="font-medium mx-1">{to}</span>
             of
-            <span className="font-medium mx-1">97</span>
+            <span className="font-medium mx-1">{total}</span>
             results
           </p>
         </div>
