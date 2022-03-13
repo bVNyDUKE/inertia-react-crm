@@ -9,8 +9,8 @@ import { Head, Link, useForm } from "@inertiajs/inertia-react";
 
 export default function Login({ status, canResetPassword }) {
   const { data, setData, post, processing, errors, reset } = useForm({
-    email: "",
-    password: "",
+    email: "admin@domain.com",
+    password: "password",
     remember: "",
   });
 
@@ -21,12 +21,7 @@ export default function Login({ status, canResetPassword }) {
   }, []);
 
   const onHandleChange = (event) => {
-    setData(
-      event.target.name,
-      event.target.type === "checkbox"
-        ? event.target.checked
-        : event.target.value
-    );
+    setData(event.target.name, event.target.type === "checkbox" ? event.target.checked : event.target.value);
   };
 
   const submit = (e) => {
@@ -39,9 +34,7 @@ export default function Login({ status, canResetPassword }) {
     <Guest>
       <Head title="Log in" />
 
-      {status && (
-        <div className="mb-4 font-medium text-sm text-green-600">{status}</div>
-      )}
+      {status && <div className="mb-4 font-medium text-sm text-green-600">{status}</div>}
 
       <ValidationErrors errors={errors} />
 
@@ -75,11 +68,7 @@ export default function Login({ status, canResetPassword }) {
 
         <div className="block mt-4">
           <label className="flex items-center">
-            <Checkbox
-              name="remember"
-              value={data.remember}
-              handleChange={onHandleChange}
-            />
+            <Checkbox name="remember" value={data.remember} handleChange={onHandleChange} />
 
             <span className="ml-2 text-sm text-gray-600">Remember me</span>
           </label>
@@ -87,10 +76,7 @@ export default function Login({ status, canResetPassword }) {
 
         <div className="flex items-center justify-end mt-4">
           {canResetPassword && (
-            <Link
-              href={route("password.request")}
-              className="underline text-sm text-gray-600 hover:text-gray-900"
-            >
+            <Link href={route("password.request")} className="underline text-sm text-gray-600 hover:text-gray-900">
               Forgot your password?
             </Link>
           )}
