@@ -32,7 +32,7 @@ const ClientModal = ({ form, errors, submit, isEditing, setisEditing }) => {
   };
 
   return (
-    <Modal title={"Add Client"} ref={ref} afterLeave={afterLeave}>
+    <Modal title={isEditing ? "Edit Client" : "Add Client"} buttonTitle="Add Client" ref={ref} afterLeave={afterLeave}>
       <div className="border-t border-gray-300">
         <form className="space-y-2" onSubmit={onSubmit}>
           <ValidationErrors errors={errors} />
@@ -95,7 +95,7 @@ export default function Clients({ auth, errors, clients }) {
     <Authenticated auth={auth} errors={errors} header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Clients</h2>}>
       <Head title="Clients" />
 
-      <div className="p-8 lg:px-14">
+      <div className="p-8 lg:px-14 max-w-screen-2xl mx-auto">
         <div className="mx-auto">
           <ClientModal errors={errors} form={modalForm} submit={modalSubmit} isEditing={isEditing} setisEditing={setisEditing} />
 
@@ -108,9 +108,9 @@ export default function Clients({ auth, errors, clients }) {
                     <Table.Cell data={client.company} />
                     <Table.Cell data={client.vat} />
                     <Table.Cell data={client.address} />
-                    <Table.Cell>
+                    <Table.Cell className="text-right pr-5">
                       <Button label="Edit" onClick={() => openEditModal(client)} />{" "}
-                      <Button color="red" label="Delete" onClick={() => createForm.destroy(route("clients.destroy", client.id))} />
+                      <Button color="red" label="Delete" onClick={() => createForm.delete(route("clients.destroy", client.id))} />
                     </Table.Cell>
                   </Table.Row>
                 ))}

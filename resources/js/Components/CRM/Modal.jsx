@@ -2,7 +2,7 @@ import React, { forwardRef, Fragment, useImperativeHandle } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import Button from "@/Components/CRM/Button";
 
-const Modal = forwardRef(({ children, title, afterLeave = null }, ref) => {
+const Modal = forwardRef(({ children, title, buttonTitle, afterLeave = null }, ref) => {
   let [isOpen, setisOpen] = React.useState(false);
 
   useImperativeHandle(ref, () => {
@@ -15,7 +15,7 @@ const Modal = forwardRef(({ children, title, afterLeave = null }, ref) => {
   return (
     <>
       <div className="inset-0 mb-4">
-        <Button label={title} onClick={() => setisOpen(true)} />
+        <Button label={buttonTitle} onClick={() => setisOpen(true)} />
       </div>
       <Transition appear show={isOpen} as={Fragment} afterLeave={afterLeave}>
         <Dialog as="div" className="fixed inset-0 z-0 overflow-y-auto" open={isOpen} onClose={() => setisOpen(false)}>
