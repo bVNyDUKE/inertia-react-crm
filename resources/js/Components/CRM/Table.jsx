@@ -21,12 +21,14 @@ function Body(props) {
 }
 
 function Row(props) {
-  return <tr className={`border-b border-t border-gray-300 odd:bg-white even:bg-slate-100`}>{props.children}</tr>;
+  return <tr className={`border-b border-t border-gray-300 odd:bg-white even:bg-gray-100`}>{props.children}</tr>;
 }
 
-function Cell({ data, children }) {
+function Cell(props) {
+  const { data, children, className, ...rest } = props;
+
   return (
-    <td className="py-2 pl-2 text-gray-600">
+    <td {...rest} className={"py-2 pl-2 text-gray-600 " + className}>
       {data}
       {children}
     </td>
