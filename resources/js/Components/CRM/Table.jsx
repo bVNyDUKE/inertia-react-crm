@@ -24,11 +24,9 @@ function Row(props) {
   return <tr className={`border-b border-t border-gray-300 odd:bg-white even:bg-gray-100`}>{props.children}</tr>;
 }
 
-function Cell(props) {
-  const { data, children, className, ...rest } = props;
-
+function Cell({ data, children, className = "" }) {
   return (
-    <td {...rest} className={"py-2 pl-2 text-gray-600 " + className}>
+    <td className={`py-2 pl-2 text-gray-600 ${className}`}>
       {data}
       {children}
     </td>
