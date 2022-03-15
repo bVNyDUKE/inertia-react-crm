@@ -9,7 +9,7 @@ class ClientController extends Controller
 {
     public function index()
     {
-        return inertia('Clients', [
+        return inertia('Clients/Index', [
             'clients' => Client::orderBy('created_at','desc')->paginate(10)
             ]);
     }

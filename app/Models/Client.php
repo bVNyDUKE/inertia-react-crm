@@ -19,4 +19,9 @@ class Client extends Model
         'created_at',
         'updated_at'
     ];
+
+    public function projects()
+    {
+        return $this->hasMany(Project::class);
+    }
 }

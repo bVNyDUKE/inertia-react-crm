@@ -43,4 +43,9 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'role' => UserRoles::class,
     ];
+
+    public function projects()
+    {
+        return $this->hasMany(Project::class);
+    }
 }

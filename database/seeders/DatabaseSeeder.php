@@ -2,7 +2,10 @@
 
 namespace Database\Seeders;
 
+use App\Models\Client;
+use App\Models\Project;
 use Illuminate\Database\Seeder;
+use App\Models\User;
 
 class DatabaseSeeder extends Seeder
 {
@@ -13,8 +16,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        \App\Models\User::factory()->create();
-        \App\Models\User::factory()->isAdmin()->create();
-        \App\Models\Client::factory(10)->create();
+        User::factory()->isAdmin()->create();
+        $user = User::factory()->create();
+
+        Client::factory(30)->has(Project::factory()->for($user))->create();
+
     }
 }
