@@ -26,11 +26,9 @@ module.exports = {
     react: {
       version: "detect",
     },
+    "import/resolver": {
+      alias: [["@", "./resources/js"]],
+    },
   },
-  ignorePatterns: [
-    "tailwind.config.js",
-    ".eslintrc.js",
-    "webpack.config.js",
-    "webpack.mix.js",
-  ],
+  ignorePatterns: ["tailwind.config.js", ".eslintrc.js", "webpack.config.js", "webpack.mix.js"],
 };
