@@ -1,7 +1,11 @@
 import React from "react";
 import Dropdown from "@/Components/Breeze/Dropdown";
 
-function XUserDropdown({ auth }) {
+import { usePage } from "@inertiajs/inertia-react";
+
+function UserDropdown() {
+  const { props } = usePage();
+
   return (
     <div className="hidden sm:flex">
       <div className="relative">
@@ -10,10 +14,9 @@ function XUserDropdown({ auth }) {
             <span className="inline-flex rounded-md">
               <button
                 type="button"
-                className="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150"
+                className="inline-flex items-center rounded-md border border-transparent bg-white px-3 py-2 text-sm font-medium leading-4 text-gray-500 transition duration-150 ease-in-out hover:text-gray-700 focus:outline-none"
               >
-                {auth.user.name}
-
+                {props.auth.user.name}
                 <svg className="ml-2 -mr-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                   <path
                     fillRule="evenodd"
@@ -36,4 +39,4 @@ function XUserDropdown({ auth }) {
   );
 }
 
-export default XUserDropdown;
+export default UserDropdown;

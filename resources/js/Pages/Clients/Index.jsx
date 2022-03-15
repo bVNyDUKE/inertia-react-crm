@@ -1,5 +1,5 @@
 import React from "react";
-import { Head, useForm } from "@inertiajs/inertia-react";
+import { Head, Link, useForm } from "@inertiajs/inertia-react";
 
 import Authenticated from "@/Layouts/Authenticated";
 import Table from "@/Components/CRM/Table";
@@ -92,33 +92,35 @@ export default function Clients({ auth, errors, clients }) {
   };
 
   return (
-    <Authenticated auth={auth} errors={errors} header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Clients</h2>}>
+    <Authenticated auth={auth} errors={errors}>
       <Head title="Clients" />
+      <h1 className="mb-8 text-3xl font-bold">Clients</h1>
+      <ClientModal errors={errors} form={modalForm} submit={modalSubmit} isEditing={isEditing} setisEditing={setisEditing} />
 
-      <div className="p-8 lg:px-14 max-w-screen-2xl mx-auto">
-        <div className="mx-auto">
-          <ClientModal errors={errors} form={modalForm} submit={modalSubmit} isEditing={isEditing} setisEditing={setisEditing} />
-
-          <div className="bg-white shadow-sm">
-            <Table.Main title="Client List">
-              <Table.Head headers={["Company", "VAT", "Address", ""]} />
-              <Table.Body>
-                {clients.data.map((client) => (
-                  <Table.Row key={client.id}>
-                    <Table.Cell data={client.company} />
-                    <Table.Cell data={client.vat} />
-                    <Table.Cell data={client.address} />
-                    <Table.Cell className="text-right pr-5">
-                      <Button label="Edit" onClick={() => openEditModal(client)} />{" "}
-                      <Button color="red" label="Delete" onClick={() => createForm.delete(route("clients.destroy", client.id))} />
-                    </Table.Cell>
-                  </Table.Row>
-                ))}
-              </Table.Body>
-            </Table.Main>
-            <Pagination paginator={clients} />
-          </div>
-        </div>
+      <div className="overflow-x-auto rounded-md bg-white shadow">
+        <Table.Main title="Client List">
+          <Table.Head headers={["Company", "VAT", "Address", ""]} />
+          <Table.Body>
+            {clients.data.map((client) => (
+              <Table.Row key={client.id}>
+                <Table.Cell>
+                  <Link className="flex items-center px-6 py-4 focus:text-indigo-500" href="">
+                    {client.company}
+                  </Link>
+                </Table.Cell>
+                <Table.Cell data={client.vat} />
+                <Table.Cell data={client.address} />
+                <Table.Cell className="pr-5 text-right">
+                  <Button label="Edit" onClick={() => openEditModal(client)} />{" "}
+                  <Button color="red" label="Delete" onClick={() => createForm.delete(route("clients.destroy", client.id))} />
+                </Table.Cell>
+              </Table.Row>
+            ))}
+          </Table.Body>
+        </Table.Main>
+      </div>
+      <div className="mt-6">
+        <Pagination paginator={clients} />
       </div>
     </Authenticated>
   );
