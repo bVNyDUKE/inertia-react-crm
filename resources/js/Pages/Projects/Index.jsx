@@ -1,45 +1,49 @@
 import React from "react";
-import { Head, Link } from "@inertiajs/inertia-react";
+import { Link } from "@inertiajs/inertia-react";
 
 import Authenticated from "@/Layouts/Authenticated";
 import Table from "@/Components/CRM/Table";
 import Button from "@/Components/CRM/Button";
-import Pagination from "@/Components/CRM/Pagination";
+import PageTitle from "@/Components/CRM/PageTitle";
 
-export default function ProjectsIndex({ auth, errors, projects }) {
+const ProjectsIndex = ({ projects }) => {
   return (
-    <Authenticated auth={auth} errors={errors} header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Projects</h2>}>
-      <Head title="Projects" />
-
-      <div className="p-8 lg:px-14 max-w-screen-2xl mx-auto">
-        <div className="mx-auto">
-          <div className="inset-0 mb-4">
-            <Link href={route("projects.create")}>
-              <Button label={"Add Project"} />
-            </Link>
-          </div>
-
-          <div className="bg-white shadow-sm">
-            <Table.Main title="Project List">
-              <Table.Head headers={["Title", "User", "Client", "Status", ""]} />
-              <Table.Body>
-                {projects.data.map((project) => (
-                  <Table.Row key={project.id}>
-                    <Table.Cell className="w-1/3" data={project.title} />
-                    <Table.Cell data={project.user.name} />
-                    <Table.Cell data={project.client.company} />
-                    <Table.Cell className="w-10" data={project.status} />
-                    <Table.Cell className="w-1/6 text-right pr-5">
-                      <Button label="Edit" /> <Button color="red" label="Delete" />
-                    </Table.Cell>
-                  </Table.Row>
-                ))}
-              </Table.Body>
-            </Table.Main>
-            <Pagination paginator={projects} />
-          </div>
-        </div>
+    <>
+      <PageTitle>Projects</PageTitle>
+      <div className="inset-0 mb-4">
+        <Button label="Add Project" />
       </div>
-    </Authenticated>
+
+      <Table.Main paginator={projects}>
+        <Table.Head>
+          <Table.Th>Title</Table.Th>
+          <Table.Th>User</Table.Th>
+          <Table.Th>Client</Table.Th>
+          <Table.Th>Status</Table.Th>
+          <Table.Th></Table.Th>
+        </Table.Head>
+        <Table.Body>
+          {projects.data.map((project) => (
+            <Table.Row key={project.id}>
+              <Table.Cell className="w-1/3">
+                <Link className="flex items-center px-6 py-4 focus:text-indigo-500" href="">
+                  {project.title}
+                </Link>
+              </Table.Cell>
+              <Table.Cell>{project.user.name}</Table.Cell>
+              <Table.Cell>{project.client.company}</Table.Cell>
+              <Table.Cell className="w-10 text-center">{project.status}</Table.Cell>
+              <Table.Cell className="w-1/6 pr-5 text-right">
+                <Button label="Edit" /> <Button color="red" label="Delete" />
+              </Table.Cell>
+            </Table.Row>
+          ))}
+        </Table.Body>
+      </Table.Main>
+    </>
   );
-}
+};
+
+ProjectsIndex.layout = (page) => <Authenticated title="Projects">{page}</Authenticated>;
+
+export default ProjectsIndex;

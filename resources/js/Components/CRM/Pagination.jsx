@@ -7,25 +7,25 @@ function Pagination({ paginator }) {
   const links = allLinks.filter((link) => !link.label.includes("Previous") && !link.label.includes("Next"));
 
   return (
-    <div className="px-4 pb-2 flex items-center justify-between sm:px-6">
-      <div className="sm:flex-1 sm:flex sm:items-center sm:justify-between">
+    <div className="mt-6 flex items-center justify-between px-4 pb-2 sm:px-6">
+      <div className="sm:flex sm:flex-1 sm:items-center sm:justify-between">
         <div>
           <p className="text-sm text-gray-700">
             Showing
-            <span className="font-medium mx-1">{from}</span>
+            <span className="mx-1 font-medium">{from}</span>
             to
-            <span className="font-medium mx-1">{to}</span>
+            <span className="mx-1 font-medium">{to}</span>
             of
-            <span className="font-medium mx-1">{total}</span>
+            <span className="mx-1 font-medium">{total}</span>
             results
           </p>
         </div>
         <div>
-          <nav className="relative z-0 inline-flex rounded-md shadow-sm -space-x-px" aria-label="Pagination">
+          <nav className="relative z-0 inline-flex -space-x-px rounded-md shadow-sm" aria-label="Pagination">
             <Link
               as="a"
               href={previous}
-              className="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"
+              className="relative inline-flex items-center rounded-l-md border border-gray-300 bg-white px-2 py-2 text-sm font-medium text-gray-500 hover:bg-gray-50"
             >
               <span className="sr-only">Previous</span>
               <svg className="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
@@ -43,15 +43,15 @@ function Pagination({ paginator }) {
                 key={link.label}
                 aria-current={`${link.active && "page"}`}
                 className={` ${
-                  link.active ? "z-10 bg-indigo-50 border-indigo-500 text-indigo-600" : "border-gray-300 text-gray-500 hover:bg-gray-50"
-                } relative inline-flex items-center px-4 py-2 border text-sm font-medium`}
+                  link.active ? "z-10 border-indigo-500 bg-indigo-50 text-indigo-600" : "border-gray-300 text-gray-500 hover:bg-gray-50"
+                } relative inline-flex items-center border px-4 py-2 text-sm font-medium`}
               >
                 {link.label}
               </Link>
             ))}
             <Link
               href={next}
-              className="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"
+              className="relative inline-flex items-center rounded-r-md border border-gray-300 bg-white px-2 py-2 text-sm font-medium text-gray-500 hover:bg-gray-50"
             >
               <span className="sr-only">Next</span>
               <svg className="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
