@@ -3,15 +3,17 @@ import { Link } from "@inertiajs/inertia-react";
 
 import Authenticated from "@/Layouts/Authenticated";
 import Table from "@/Components/CRM/Table";
-import Button from "@/Components/CRM/Button";
 import PageTitle from "@/Components/CRM/PageTitle";
 
 const ProjectsIndex = ({ projects }) => {
   return (
     <>
       <PageTitle>Projects</PageTitle>
-      <div className="inset-0 mb-4">
-        <Button label="Add Project" />
+      <div className="mb-4 flex items-center justify-between ">
+        <div>Placeholder</div>
+        <Link as={"button"} className="btn-indigo" href={route("projects.create")}>
+          Create Project
+        </Link>
       </div>
 
       <Table.Main paginator={projects}>
@@ -33,9 +35,7 @@ const ProjectsIndex = ({ projects }) => {
               <Table.Cell>{project.user.name}</Table.Cell>
               <Table.Cell>{project.client.company}</Table.Cell>
               <Table.Cell className="w-10 text-center">{project.status}</Table.Cell>
-              <Table.Cell className="w-1/6 pr-5 text-right">
-                <Button label="Edit" /> <Button color="red" label="Delete" />
-              </Table.Cell>
+              <Table.Cell className="w-1/6 pr-5 text-right"></Table.Cell>
             </Table.Row>
           ))}
         </Table.Body>
