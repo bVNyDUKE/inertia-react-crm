@@ -2,11 +2,11 @@ import React from "react";
 
 import { useForm } from "@inertiajs/inertia-react";
 import Authenticated from "@/Layouts/Authenticated";
-import PageTitle from "@/Components/CRM/PageTitle";
-import Input from "@/Components/CRM/Input";
-import CrumbsLink from "@/Components/CRM/CrumbsLink";
+import PageTitle from "@/Components/PageTitle";
+import Input from "@/Components/Input";
+import CrumbsLink from "@/Components/CrumbsLink";
 
-function CreateProject({ errors, clients, users }) {
+function CreateProject({ clients, users }) {
   const form = useForm({
     title: "",
     user: "",

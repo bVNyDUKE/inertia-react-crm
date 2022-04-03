@@ -1,6 +1,6 @@
 import React from "react";
-import TopBar from "@/Components/CRM/TopBar";
-import MainMenu from "@/Components/CRM/MainMenu";
+import TopBar from "@/Components/TopBar";
+import MainMenu from "@/Components/MainMenu";
 import { Head } from "@inertiajs/inertia-react";
 
 export default function Authenticated({ children, title }) {

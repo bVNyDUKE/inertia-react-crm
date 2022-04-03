@@ -34,7 +34,7 @@ const Area = ({ label, error, ...rest }) => (
 );
 
 const Option = ({ key, value, children }) => (
-  <option key={key} value={value} className="">
+  <option key={key} value={value} className="text-sm hover:bg-orange-300 hover:text-white">
     {children}
   </option>
 );

@@ -2,10 +2,10 @@ import React from "react";
 import { Link, useForm } from "@inertiajs/inertia-react";
 
 import Authenticated from "@/Layouts/Authenticated";
-import Table from "@/Components/CRM/Table";
-import Modal from "@/Components/CRM/Modal";
-import Button from "@/Components/CRM/Button";
-import PageTitle from "@/Components/CRM/PageTitle";
+import Table from "@/Components/Table";
+import Modal from "@/Components/Modal";
+import Button from "@/Components/Button";
+import PageTitle from "@/Components/PageTitle";
 import Input from "@/Components/Breeze/Input";
 import Label from "@/Components/Breeze/Label";
 import ValidationErrors from "@/Components/Breeze/ValidationErrors";

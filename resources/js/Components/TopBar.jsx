@@ -1,6 +1,6 @@
 import React from "react";
-import ApplicationLogo from "@/Components/CRM/ApplicationLogo";
-import UserDropdown from "@/Components/CRM/UserDropdown";
+import ApplicationLogo from "@/Components/ApplicationLogo";
+import UserDropdown from "@/Components/UserDropdown";
 
 function TopBar() {
   return (

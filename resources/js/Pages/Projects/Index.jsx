@@ -2,8 +2,8 @@ import React from "react";
 import { Link } from "@inertiajs/inertia-react";
 
 import Authenticated from "@/Layouts/Authenticated";
-import Table from "@/Components/CRM/Table";
-import PageTitle from "@/Components/CRM/PageTitle";
+import Table from "@/Components/Table";
+import PageTitle from "@/Components/PageTitle";
 
 const ProjectsIndex = ({ projects }) => {
   return (
@@ -32,7 +32,9 @@ const ProjectsIndex = ({ projects }) => {
                   {project.title}
                 </Link>
               </Table.Cell>
-              <Table.Cell>{project.user.name}</Table.Cell>
+              <Table.Cell>
+                <Link href="">{project.user.name}</Link>
+              </Table.Cell>
               <Table.Cell>{project.client.company}</Table.Cell>
               <Table.Cell className="w-10 text-center">{project.status}</Table.Cell>
               <Table.Cell className="w-1/6 pr-5 text-right"></Table.Cell>

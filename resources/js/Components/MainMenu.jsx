@@ -1,5 +1,5 @@
 import { Link } from "@inertiajs/inertia-react";
-import Icon from "@/Components/CRM/Icons";
+import Icon from "@/Components/Icons";
 import React from "react";
 
 const MenuItem = ({ routeName, label, icon, href = null }) => {
