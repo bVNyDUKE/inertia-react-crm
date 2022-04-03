@@ -33,17 +33,17 @@ const Area = ({ label, error, ...rest }) => (
   </Wrapper>
 );
 
-const Option = ({ key, value, title }) => (
+const Option = ({ key, value, children }) => (
   <option key={key} value={value} className="">
-    {title}
+    {children}
   </option>
 );
 
-const Select = ({ label, error, options, ...rest }) => (
+const Select = ({ label, error, name = nameFromLabel(label), children, ...rest }) => (
   <Wrapper className={"lg:w-1/2"}>
     <Label label={label} />
-    <select name={nameFromLabel(label)} {...rest} className="input-text form-select">
-      {options && options.map((op) => <Option key={op.id} value={op.id} title={op.name} />)}
+    <select name={name} {...rest} className="input-text form-select">
+      {children}
     </select>
     <Error error={error} />
   </Wrapper>
@@ -53,4 +53,5 @@ export default {
   Text,
   Area,
   Select,
+  Option,
 };

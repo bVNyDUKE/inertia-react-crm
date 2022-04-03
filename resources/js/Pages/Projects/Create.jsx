@@ -38,8 +38,24 @@ function CreateProject({ errors, clients, users }) {
           <div className="-mb-8 -mr-6 flex flex-wrap items-center p-8">
             <Input.Text label={"Title"} error={form.errors.title} onChange={handleInputChange} />
             <div className="lg:w-1/2">{""}</div>
-            <Input.Select label={"Client"} error={form.errors.client} onChange={handleInputChange} options={clients} />
-            <Input.Select label={"User"} error={form.errors.user} onChange={handleInputChange} options={users} />
+            <Input.Select label={"Client"} name={"client_id"} error={form.errors.client_id} onChange={handleInputChange}>
+              <option selected></option>
+              {clients &&
+                clients.map((client) => (
+                  <Input.Option key={client.id} value={client.id}>
+                    {client.company}{" "}
+                  </Input.Option>
+                ))}
+            </Input.Select>
+            <Input.Select label={"User"} name={"user_id"} error={form.errors.user_id} onChange={handleInputChange}>
+              <option selected></option>
+              {users &&
+                users.map((user) => (
+                  <Input.Option key={user.id} value={user.id}>
+                    {user.name}{" "}
+                  </Input.Option>
+                ))}
+            </Input.Select>
             <Input.Area label={"Description"} error={form.errors.description} onBlur={handleInputChange} />
           </div>
           <div className="mt-5 flex items-center justify-end border-t border-gray-100 bg-gray-50 px-8 py-4">
