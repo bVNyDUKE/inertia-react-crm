@@ -1,55 +1,56 @@
 import React from "react";
 
-import { Head, Link, useForm } from "@inertiajs/inertia-react";
+import { useForm } from "@inertiajs/inertia-react";
 import Authenticated from "@/Layouts/Authenticated";
-import ValidationErrors from "@/Components/Breeze/ValidationErrors";
-import Input from "@/Components/Breeze/Input";
-import Label from "@/Components/Breeze/Label";
-import Button from "@/Components/CRM/Button";
+import PageTitle from "@/Components/CRM/PageTitle";
+import Input from "@/Components/CRM/Input";
+import CrumbsLink from "@/Components/CRM/CrumbsLink";
 
-function CreateProject({ auth, errors }) {
+function CreateProject({ errors, clients, users }) {
   const form = useForm({
     title: "",
+    user: "",
+    client: "",
     description: "",
   });
 
+  console.log(form.errors);
+
   const handleInputChange = (e) => {
+    if (form.data[e.target.name] !== e.target.value) {
+      form.clearErrors(e.target.name);
+    }
     form.setData(e.target.name, e.target.value);
   };
 
   const submit = (e) => {
     e.preventDefault();
+    form.post(route("projects.store"));
   };
 
   return (
-    <Authenticated
-      auth={auth}
-      header={
-        <h2 className="font-semibold text-xl text-gray-800 leading-tight">
-          <Link className="text-indigo-400 hover:text-indigo-600" href={route("projects.index")}>
-            Projects
-          </Link>
-          <span className="text-indigo-400 font-medium">/</span> Create
-        </h2>
-      }
-    >
-      <div className="p-8 lg:px-14 max-w-screen-2xl mx-auto">
-        <Head title="Create Contact" />
-        <div className="max-w-3xl bg-white rounded-md shadow overflow-hidden">
-          <form onSubmit={submit}>
-            <div className="flex flex-wrap -mb-8 -mr-6 p-8 space-x-2 items-center">
-              <ValidationErrors errors={errors} />
-              <Label forInput="title">Project Title</Label>
-              <Input name="title" value={form.data.title} required={true} handleChange={handleInputChange} className="w-full" />
-            </div>
-            <div className="flex items-center justify-end px-8 py-4 bg-gray-50 border-t border-gray-100 mt-5">
-              <Button label="Create Project" />
-            </div>
-          </form>
-        </div>
+    <>
+      <PageTitle>
+        <CrumbsLink routeName={"projects.index"} backLink="Projects" pageName="Create" />
+      </PageTitle>
+      <div className="max-w-3xl overflow-hidden rounded-md bg-white shadow">
+        <form onSubmit={submit}>
+          <div className="-mb-8 -mr-6 flex flex-wrap items-center p-8">
+            <Input.Text label={"Title"} error={form.errors.title} onChange={handleInputChange} />
+            <div className="lg:w-1/2">{""}</div>
+            <Input.Select label={"Client"} error={form.errors.client} onChange={handleInputChange} options={clients} />
+            <Input.Select label={"User"} error={form.errors.user} onChange={handleInputChange} options={users} />
+            <Input.Area label={"Description"} error={form.errors.description} onBlur={handleInputChange} />
+          </div>
+          <div className="mt-5 flex items-center justify-end border-t border-gray-100 bg-gray-50 px-8 py-4">
+            <button className="btn-indigo">Create Project</button>
+          </div>
+        </form>
       </div>
-    </Authenticated>
+    </>
   );
 }
+
+CreateProject.layout = (page) => <Authenticated title="Projects">{page}</Authenticated>;
 
 export default CreateProject;

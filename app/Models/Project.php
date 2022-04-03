@@ -2,22 +2,28 @@
 
 namespace App\Models;
 
+use App\Enums\ProjectStatus;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Enums\ProjectStatus;
 
 class Project extends Model
 {
     use HasFactory;
 
     protected $casts = [
-        'status' => ProjectStatus::class
+        'status' => ProjectStatus::class,
+    ];
+
+    protected $fillable = [
+        'title',
+        'status',
+        'description',
     ];
 
     protected $hidden = [
         'created_at',
         'updated_at',
-        'deleted_at'
+        'deleted_at',
     ];
 
     public function client()
