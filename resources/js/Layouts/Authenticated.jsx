@@ -1,4 +1,3 @@
-import React from "react";
 import TopBar from "@/Components/TopBar";
 import MainMenu from "@/Components/MainMenu";
 import { Head } from "@inertiajs/inertia-react";

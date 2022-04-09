@@ -2,11 +2,13 @@ import { Link } from "@inertiajs/inertia-react";
 import Authenticated from "@/Layouts/Authenticated";
 import Table from "@/Components/Table";
 import PageTitle from "@/Components/PageTitle";
+import Message from "@/Components/Message";
 
-const ProjectsIndex = ({ projects }) => {
+const ProjectsIndex = ({ projects, message }) => {
   return (
     <>
       <PageTitle>Projects</PageTitle>
+      <Message message={message} />
       <div className="mb-4 flex items-center justify-between ">
         <div>Placeholder</div>
         <Link as={"button"} className="btn-indigo" href={route("projects.create")}>

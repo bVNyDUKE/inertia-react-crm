@@ -1,5 +1,5 @@
-import React from "react";
-import { Link, useForm } from "@inertiajs/inertia-react";
+import { useRef, useEffect, useState } from "react";
+import { useForm } from "@inertiajs/inertia-react";
 
 import Authenticated from "@/Layouts/Authenticated";
 import Table from "@/Components/Table";
@@ -12,9 +12,9 @@ import ValidationErrors from "@/Components/Breeze/ValidationErrors";
 import { default as ButtonBlack } from "@/Components/Breeze/Button";
 
 const ClientModal = ({ form, errors, submit, isEditing, setisEditing }) => {
-  const ref = React.useRef(null);
+  const ref = useRef(null);
 
-  React.useEffect(() => isEditing && ref.current.showModal(), [isEditing]);
+  useEffect(() => isEditing && ref.current.showModal(), [isEditing]);
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -50,15 +50,15 @@ const ClientModal = ({ form, errors, submit, isEditing, setisEditing }) => {
 };
 
 const Clients = ({ errors, clients }) => {
-  const [isEditing, setisEditing] = React.useState(false);
+  const [isEditing, setisEditing] = useState(false);
 
   const createForm = useForm({ company: "", vat: "", address: "" });
   const editForm = useForm({});
 
-  const [modalForm, setModalForm] = React.useState(createForm);
-  const [modalSubmit, setModalSubmit] = React.useState("");
+  const [modalForm, setModalForm] = useState(createForm);
+  const [modalSubmit, setModalSubmit] = useState("");
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (isEditing) {
       setModalForm(editForm);
       setModalSubmit(() => updateClient);
@@ -106,11 +106,7 @@ const Clients = ({ errors, clients }) => {
         <Table.Body>
           {clients.data.map((client) => (
             <Table.Row key={client.id}>
-              <Table.Cell>
-                <Link className="flex items-center px-6 py-4 focus:text-indigo-500" href="">
-                  {client.company}
-                </Link>
-              </Table.Cell>
+              <Table.Cell className="py-4 px-6">{client.company}</Table.Cell>
               <Table.Cell className="text-right">{client.vat}</Table.Cell>
               <Table.Cell className="text-right">{client.address}</Table.Cell>
               <Table.Cell className="pr-5 text-right">
