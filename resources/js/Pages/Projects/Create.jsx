@@ -1,20 +1,17 @@
-import React from "react";
-
 import { useForm } from "@inertiajs/inertia-react";
 import Authenticated from "@/Layouts/Authenticated";
 import PageTitle from "@/Components/PageTitle";
 import Input from "@/Components/Input";
 import CrumbsLink from "@/Components/CrumbsLink";
 
-function CreateProject({ clients, users }) {
+function CreateProject({ clients, users, statuses }) {
   const form = useForm({
     title: "",
+    status: "",
     user: "",
     client: "",
     description: "",
   });
-
-  console.log(form.errors);
 
   const handleInputChange = (e) => {
     if (form.data[e.target.name] !== e.target.value) {
@@ -37,24 +34,35 @@ function CreateProject({ clients, users }) {
         <form onSubmit={submit}>
           <div className="-mb-8 -mr-6 flex flex-wrap items-center p-8">
             <Input.Text label={"Title"} error={form.errors.title} onChange={handleInputChange} />
-            <div className="lg:w-1/2">{""}</div>
-            <Input.Select label={"Client"} name={"client_id"} error={form.errors.client_id} onChange={handleInputChange}>
-              <option selected></option>
-              {clients &&
-                clients.map((client) => (
-                  <Input.Option key={client.id} value={client.id}>
-                    {client.company}{" "}
-                  </Input.Option>
-                ))}
+            <Input.Select defaultValue="0" label={"Status"} name={"status"} error={form.errors.status} onChange={handleInputChange}>
+              <option value="0" disabled>
+                Set a status
+              </option>
+              {statuses.map((status, index) => (
+                <Input.Option key={index} value={status}>
+                  {status}
+                </Input.Option>
+              ))}
             </Input.Select>
-            <Input.Select label={"User"} name={"user_id"} error={form.errors.user_id} onChange={handleInputChange}>
-              <option selected></option>
-              {users &&
-                users.map((user) => (
-                  <Input.Option key={user.id} value={user.id}>
-                    {user.name}{" "}
-                  </Input.Option>
-                ))}
+            <Input.Select defaultValue="0" label={"Client"} name={"client_id"} error={form.errors.client_id} onChange={handleInputChange}>
+              <option value="0" disabled>
+                Select a client
+              </option>
+              {clients.map((client) => (
+                <Input.Option key={client.id} value={client.id}>
+                  {client.company}{" "}
+                </Input.Option>
+              ))}
+            </Input.Select>
+            <Input.Select defaultValue="0" label={"User"} name={"user_id"} error={form.errors.user_id} onChange={handleInputChange}>
+              <option value="0" disabled>
+                Select a user
+              </option>
+              {users.map((user) => (
+                <Input.Option key={user.id} value={user.id}>
+                  {user.name}{" "}
+                </Input.Option>
+              ))}
             </Input.Select>
             <Input.Area label={"Description"} error={form.errors.description} onBlur={handleInputChange} />
           </div>

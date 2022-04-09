@@ -1,3 +1,4 @@
+import { Link } from "@inertiajs/inertia-react";
 import React from "react";
 import Pagination from "./Pagination";
 
@@ -25,6 +26,16 @@ function Cell({ children, className = "" }) {
   return <td className={`border-t ${className}`}>{children}</td>;
 }
 
+function LinkCell({ children, href, className = "" }) {
+  return (
+    <Cell className={className}>
+      <Link className="flex items-center px-6 py-4 focus:text-indigo-500" href={href}>
+        {children}
+      </Link>
+    </Cell>
+  );
+}
+
 function Main(props) {
   return (
     <>
@@ -42,6 +53,7 @@ const Table = {
   Body,
   Row,
   Cell,
+  LinkCell,
   Th,
 };
 

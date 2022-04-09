@@ -1,14 +1,12 @@
-import React from "react";
-
 const nameFromLabel = (label) => label.toLowerCase().replace(" ", "_");
 
-const Wrapper = ({ children, className }) => <div className={`w-full pr-6 pb-8 ${className}`}>{children}</div>;
+const Wrapper = ({ children, className }) => <div className={`relative w-full pr-6 pb-8 ${className}`}>{children}</div>;
 
 const Error = ({ error }) => {
   if (!error) {
     return null;
   }
-  return <div className="mt-2 border border-red-300 p-2 text-red-500">{error}</div>;
+  return <div className="absolute text-sm text-red-500">{error}</div>;
 };
 
 const Label = ({ label }) => (
@@ -33,8 +31,8 @@ const Area = ({ label, error, ...rest }) => (
   </Wrapper>
 );
 
-const Option = ({ key, value, children }) => (
-  <option key={key} value={value} className="text-sm hover:bg-orange-300 hover:text-white">
+const Option = ({ value, children }) => (
+  <option value={value} className="text-sm hover:bg-orange-300 hover:text-white">
     {children}
   </option>
 );

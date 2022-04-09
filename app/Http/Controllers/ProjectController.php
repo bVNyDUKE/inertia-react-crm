@@ -7,6 +7,7 @@ use App\Models\Client;
 use App\Models\Project;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rules\Enum;
 
 class ProjectController extends Controller
 {
@@ -14,10 +15,11 @@ class ProjectController extends Controller
     {
         return inertia(
             'Projects/Index',
-            ['projects' => Project::select('id', 'user_id', 'client_id', 'title', 'status')
-            ->with(['user:id,name', 'client:id,company'])
-            ->orderBy('created_at', 'desc')
-            ->paginate(10),
+            [
+                'projects' => Project::select('id', 'user_id', 'client_id', 'title', 'status')
+                    ->with(['user:id,name', 'client:id,company'])
+                    ->orderBy('created_at', 'desc')
+                    ->paginate(10),
             ]
         );
     }
@@ -26,8 +28,11 @@ class ProjectController extends Controller
     {
         return inertia(
             'Projects/Create',
-            ['clients' => Client::select('id', 'company')->get(),
-            'users' =>User::select('id', 'name')->get(), ]
+            [
+                'clients' => Client::select('id', 'company')->get(),
+                'users' => User::select('id', 'name')->get(),
+                'statuses' => ProjectStatus::cases(),
+            ]
         );
     }
 
@@ -36,32 +41,48 @@ class ProjectController extends Controller
         $validated = $request->validate([
             'title' => 'required|max:255',
             'description' => 'required|max:6000',
+            'status' => ['required', new Enum(ProjectStatus::class)],
             'client_id' => 'required|exists:clients,id',
             'user_id' => 'required|exists:users,id',
         ]);
 
-        Project::create([...$validated, 'status' => ProjectStatus::ACTIVE]);
+        Project::create($validated);
 
         return redirect()->route('projects.index');
     }
 
-    public function show(Project $project)
-    {
-        //
-    }
-
     public function edit(Project $project)
     {
-        //
+        return inertia(
+            'Projects/Edit',
+            [
+                'project' => $project,
+                'clients' => Client::select('id', 'company')->get(),
+                'users' =>User::select('id', 'name')->get(),
+                'statuses' => ProjectStatus::cases(),
+            ]
+        );
     }
 
     public function update(Request $request, Project $project)
     {
-        //
+        $validated = $request->validate([
+            'title' => 'required|max:255',
+            'description' => 'required|max:6000',
+            'status' => ['required', new Enum(ProjectStatus::class)],
+            'client_id' => 'required|exists:clients,id',
+            'user_id' => 'required|exists:users,id',
+        ]);
+
+        $project->update($validated);
+
+        return redirect()->route('projects.index');
     }
 
     public function destroy(Project $project)
     {
-        //
+        $project->delete();
+
+        return redirect()->route('projects.index');
     }
 }

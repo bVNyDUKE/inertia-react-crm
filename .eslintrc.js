@@ -8,7 +8,7 @@ module.exports = {
   globals: {
     route: true,
   },
-  extends: ["plugin:react/recommended", "eslint:recommended", "prettier"],
+  extends: ["plugin:react/recommended", "eslint:recommended", "prettier", "plugin:react/jsx-runtime"],
   parserOptions: {
     ecmaFeatures: {
       jsx: true,

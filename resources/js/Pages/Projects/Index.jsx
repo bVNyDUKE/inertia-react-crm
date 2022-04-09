@@ -1,6 +1,4 @@
-import React from "react";
 import { Link } from "@inertiajs/inertia-react";
-
 import Authenticated from "@/Layouts/Authenticated";
 import Table from "@/Components/Table";
 import PageTitle from "@/Components/PageTitle";
@@ -25,21 +23,22 @@ const ProjectsIndex = ({ projects }) => {
           <Table.Th></Table.Th>
         </Table.Head>
         <Table.Body>
-          {projects.data.map((project) => (
-            <Table.Row key={project.id}>
-              <Table.Cell className="w-1/3">
-                <Link className="flex items-center px-6 py-4 focus:text-indigo-500" href="">
+          {projects.data.map((project) => {
+            let href = route("projects.edit", project.id);
+            return (
+              <Table.Row key={project.id}>
+                <Table.LinkCell className="w-1/3" href={href}>
                   {project.title}
-                </Link>
-              </Table.Cell>
-              <Table.Cell>
-                <Link href="">{project.user.name}</Link>
-              </Table.Cell>
-              <Table.Cell>{project.client.company}</Table.Cell>
-              <Table.Cell className="w-10 text-center">{project.status}</Table.Cell>
-              <Table.Cell className="w-1/6 pr-5 text-right"></Table.Cell>
-            </Table.Row>
-          ))}
+                </Table.LinkCell>
+                <Table.LinkCell href={href}>{project.client.company}</Table.LinkCell>
+                <Table.LinkCell href={href}>{project.user.name}</Table.LinkCell>
+                <Table.LinkCell className="w-10 text-center" href={href}>
+                  {project.status}
+                </Table.LinkCell>
+                <Table.LinkCell className="w-1/6 pr-5 text-right" href={href}></Table.LinkCell>
+              </Table.Row>
+            );
+          })}
         </Table.Body>
       </Table.Main>
     </>

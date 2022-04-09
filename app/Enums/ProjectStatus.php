@@ -4,9 +4,8 @@ namespace App\Enums;
 
 enum ProjectStatus: string
 {
-    case ACTIVE = 'active';
-    case PENDING = 'pending';
-    case HOLD = 'hold';
-    case CANCELLED = 'cancelled';
+    case ACTIVE = 'Active';
+    case PENDING = 'Pending';
+    case HOLD = 'Hold';
+    case CANCELLED = 'Cancelled';
 }
-
