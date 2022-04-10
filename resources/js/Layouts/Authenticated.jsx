@@ -1,6 +1,7 @@
 import TopBar from "@/Components/TopBar";
 import MainMenu from "@/Components/MainMenu";
 import { Head } from "@inertiajs/inertia-react";
+import Toast from "@/Components/Toast";
 
 export default function Authenticated({ children, title }) {
   return (
@@ -10,7 +11,10 @@ export default function Authenticated({ children, title }) {
         <TopBar />
         <div className="md:flex md:flex-grow md:overflow-hidden">
           <MainMenu />
-          <div className="px-4 py-8 md:flex-1 md:overflow-y-auto md:p-12">{children}</div>
+          <div className="px-4 py-8 md:flex-1 md:overflow-y-auto md:p-12">
+            <Toast />
+            {children}
+          </div>
         </div>
       </div>
     </div>

@@ -1,3 +1,4 @@
+import { usePage } from "@inertiajs/inertia-react";
 import { useState } from "react";
 
 const Success = ({ text }) => {
@@ -34,7 +35,8 @@ const Error = ({ text }) => {
   );
 };
 
-const Message = ({ message }) => {
+const Message = () => {
+  const { message } = usePage().props;
   if (message) {
     return (
       <>
@@ -43,6 +45,7 @@ const Message = ({ message }) => {
       </>
     );
   }
+  return <div></div>;
 };
 
 export default Message;
