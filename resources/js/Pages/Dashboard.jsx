@@ -1,6 +1,3 @@
-import React from "react";
-import Authenticated from "@/Layouts/Authenticated";
-
 const Dashboard = () => {
   return (
     <>
@@ -14,7 +11,5 @@ const Dashboard = () => {
     </>
   );
 };
-
-Dashboard.layout = (page) => <Authenticated title="Dashboard">{page}</Authenticated>;
 
 export default Dashboard;
