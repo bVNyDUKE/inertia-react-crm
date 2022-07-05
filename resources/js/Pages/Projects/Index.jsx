@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { Head, Link, useForm } from "@inertiajs/inertia-react";
-import Authenticated from "@/Layouts/Authenticated";
 import Table from "@/Components/Table";
 import PageTitle from "@/Components/PageTitle";
 
@@ -78,7 +77,5 @@ const ProjectsIndex = ({ projects, statuses }) => {
     </>
   );
 };
-
-ProjectsIndex.layout = (page) => <Authenticated title="Projects">{page}</Authenticated>;
 
 export default ProjectsIndex;

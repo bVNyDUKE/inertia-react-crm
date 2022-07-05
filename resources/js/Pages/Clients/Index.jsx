@@ -1,7 +1,6 @@
 import { useRef, useEffect, useState } from "react";
-import { useForm } from "@inertiajs/inertia-react";
+import { Head, useForm } from "@inertiajs/inertia-react";
 
-import Authenticated from "@/Layouts/Authenticated";
 import Table from "@/Components/Table";
 import Modal from "@/Components/Modal";
 import Button from "@/Components/Button";
@@ -94,6 +93,7 @@ const Clients = ({ errors, clients }) => {
   return (
     <>
       <PageTitle>Clients</PageTitle>
+      <Head title="Clients" />
       <ClientModal errors={errors} form={modalForm} submit={modalSubmit} isEditing={isEditing} setisEditing={setisEditing} />
 
       <Table.Main paginator={clients}>
@@ -120,7 +120,5 @@ const Clients = ({ errors, clients }) => {
     </>
   );
 };
-
-Clients.layout = (page) => <Authenticated title="Clients">{page}</Authenticated>;
 
 export default Clients;

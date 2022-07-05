@@ -1,12 +1,10 @@
 import TopBar from "@/Components/TopBar";
 import MainMenu from "@/Components/MainMenu";
-import { Head } from "@inertiajs/inertia-react";
 import Toast from "@/Components/Toast";
 
-export default function Authenticated({ children, title }) {
+export default function Authenticated(children) {
   return (
     <div className="md:flex md:flex-col">
-      <Head title={title} />
       <div className="md:flex md:h-screen md:flex-col">
         <TopBar />
         <div className="md:flex md:flex-grow md:overflow-hidden">

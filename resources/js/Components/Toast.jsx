@@ -4,7 +4,6 @@ import "react-toastify/dist/ReactToastify.min.css";
 
 const Toast = () => {
   const { message } = usePage().props;
-  console.log(message);
   if (message?.success) toast.success(message.success);
   if (message?.error) toast.error(message.error);
 

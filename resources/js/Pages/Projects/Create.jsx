@@ -1,5 +1,4 @@
-import { useForm } from "@inertiajs/inertia-react";
-import Authenticated from "@/Layouts/Authenticated";
+import { Head, useForm } from "@inertiajs/inertia-react";
 import PageTitle from "@/Components/PageTitle";
 import Input from "@/Components/Input";
 import CrumbsLink from "@/Components/CrumbsLink";
@@ -30,6 +29,7 @@ function CreateProject({ clients, users, statuses }) {
       <PageTitle>
         <CrumbsLink routeName={"projects.index"} backLink="Projects" pageName="Create" />
       </PageTitle>
+      <Head title="Projects" />
       <div className="max-w-3xl overflow-hidden rounded-md bg-white shadow">
         <form onSubmit={submit}>
           <div className="-mb-8 -mr-6 flex flex-wrap items-center p-8">
@@ -74,7 +74,5 @@ function CreateProject({ clients, users, statuses }) {
     </>
   );
 }
-
-CreateProject.layout = (page) => <Authenticated title="Projects">{page}</Authenticated>;
 
 export default CreateProject;
