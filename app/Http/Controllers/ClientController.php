@@ -24,7 +24,7 @@ class ClientController extends Controller
         ]
         ));
 
-        return redirect()->route('clients.index');
+        return redirect()->route('clients.index')->with('success', 'Client created');
     }
 
     public function show(Client $client)
@@ -42,13 +42,13 @@ class ClientController extends Controller
         ]
         ));
 
-        return redirect()->route('clients.index');
+        return redirect()->route('clients.index')->with('success', 'Client updated');
     }
 
     public function destroy(Client $client)
     {
         $client->delete();
 
-        return redirect()->route('clients.index');
+        return redirect()->route('clients.index')->with('error', 'Client deleted');
     }
 }
