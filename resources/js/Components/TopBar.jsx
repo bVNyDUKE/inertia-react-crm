@@ -1,4 +1,3 @@
-import React from "react";
 import ApplicationLogo from "@/Components/ApplicationLogo";
 import UserDropdown from "@/Components/UserDropdown";
 

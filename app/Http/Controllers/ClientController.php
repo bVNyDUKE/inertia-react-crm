@@ -10,13 +10,14 @@ class ClientController extends Controller
     public function index()
     {
         return inertia('Clients/Index', [
-            'clients' => Client::orderBy('created_at','desc')->paginate(10)
+            'clients' => Client::orderBy('created_at', 'desc')->paginate(10),
             ]);
     }
 
     public function store(Request $request)
     {
-        Client::create($request->validate([
+        Client::create($request->validate(
+            [
             'company' => ['required', 'max:255'],
             'vat' => ['required', 'max:50'],
             'address' => ['required', 'max:2'],
@@ -33,7 +34,8 @@ class ClientController extends Controller
 
     public function update(Request $request, Client $client)
     {
-        $client->update($request->validate([
+        $client->update($request->validate(
+            [
             'company' => ['required', 'max:255'],
             'vat' => ['required', 'max:50'],
             'address' => ['required', 'max:255'],

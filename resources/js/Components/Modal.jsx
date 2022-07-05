@@ -1,8 +1,8 @@
-import React, { forwardRef, Fragment, useImperativeHandle } from "react";
+import { forwardRef, useState, Fragment, useImperativeHandle } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 
 const Modal = forwardRef(({ children, title, buttonTitle, afterLeave = null }, ref) => {
-  let [isOpen, setisOpen] = React.useState(false);
+  let [isOpen, setisOpen] = useState(false);
 
   useImperativeHandle(ref, () => {
     return {

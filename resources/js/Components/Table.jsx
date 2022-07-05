@@ -1,5 +1,4 @@
 import { Link } from "@inertiajs/inertia-react";
-import React from "react";
 import Pagination from "./Pagination";
 
 function Th({ className, children }) {

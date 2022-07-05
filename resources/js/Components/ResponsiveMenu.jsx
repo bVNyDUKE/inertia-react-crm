@@ -1,9 +1,9 @@
-import React from "react";
+import { useState } from "react";
 import { Link } from "@inertiajs/inertia-react";
 import Icon from "@/Components/Icons";
 
 const ResponsiveMenu = () => {
-  const [showingNavigationDropdown, setShowingNavigationDropdown] = React.useState(false);
+  const [showingNavigationDropdown, setShowingNavigationDropdown] = useState(false);
 
   return (
     <>

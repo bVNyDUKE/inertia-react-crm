@@ -1,4 +1,3 @@
-import React from "react";
 import Dropdown from "@/Components/Breeze/Dropdown";
 
 import { usePage } from "@inertiajs/inertia-react";

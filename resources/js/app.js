@@ -1,4 +1,3 @@
-import React from "react";
 import { render } from "react-dom";
 import { createInertiaApp } from "@inertiajs/inertia-react";
 import { InertiaProgress } from "@inertiajs/progress";
@@ -8,8 +7,7 @@ import { Ziggy } from "./routes";
 
 window.route = (name, params) => ZiggyRoute(name, params, false, Ziggy);
 
-const appName =
-  window.document.getElementsByTagName("title")[0]?.innerText || "Laravel";
+const appName = window.document.getElementsByTagName("title")[0]?.innerText || "Laravel";
 
 createInertiaApp({
   title: (title) => `${title} - ${appName}`,

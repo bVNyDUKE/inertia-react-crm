@@ -1,11 +1,45 @@
-import { Link } from "@inertiajs/inertia-react";
+import { useState } from "react";
+import { Head, Link, useForm } from "@inertiajs/inertia-react";
 import Authenticated from "@/Layouts/Authenticated";
 import Table from "@/Components/Table";
 import PageTitle from "@/Components/PageTitle";
 
-const ProjectsIndex = ({ projects }) => {
+function StatusMenu({ statuses, project }) {
+  const [isOpen, setIsOpen] = useState(false);
+  const form = useForm({ status: project.status });
+
+  //TODO TRY A SIMPLE FETCH API CALL
+
+  function handleInputChange(e) {
+    console.log(e.target.value);
+    form.setData((v) => ({ ...v, status: e.target.value }));
+    console.log(form);
+    form.patch(route("projects.update", project.id));
+    setIsOpen(false);
+  }
+
+  return (
+    <div className="relative" onClick={() => !isOpen && setIsOpen(true)}>
+      {!isOpen && <div>{project.status}</div>}
+      {isOpen && (
+        <div className="w-full">
+          <select defaultValue={project.status} onChange={handleInputChange}>
+            {statuses.map((status, index) => (
+              <option key={index} value={status}>
+                {status}
+              </option>
+            ))}
+          </select>
+        </div>
+      )}
+    </div>
+  );
+}
+
+const ProjectsIndex = ({ projects, statuses }) => {
   return (
     <>
+      <Head title="Projects" />
       <PageTitle>Projects</PageTitle>
       <div className="mb-4 flex items-center justify-between ">
         <div>Placeholder</div>
@@ -32,10 +66,10 @@ const ProjectsIndex = ({ projects }) => {
                 </Table.LinkCell>
                 <Table.LinkCell href={href}>{project.client.company}</Table.LinkCell>
                 <Table.LinkCell href={href}>{project.user.name}</Table.LinkCell>
-                <Table.LinkCell className="w-10 text-center" href={href}>
-                  {project.status}
-                </Table.LinkCell>
-                <Table.LinkCell className="w-1/6 pr-5 text-right" href={href}></Table.LinkCell>
+                <Table.Cell className="w-10 text-center">
+                  <StatusMenu project={project} statuses={statuses} />
+                </Table.Cell>
+                <Table.Cell className="w-1/6 pr-5 text-right"></Table.Cell>
               </Table.Row>
             );
           })}
