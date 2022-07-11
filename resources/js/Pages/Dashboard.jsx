@@ -1,4 +1,8 @@
+import axios from "axios";
+
 const Dashboard = () => {
+  axios.get("/projectData").then(({ data }) => console.log(data));
+
   return (
     <>
       <div className="py-12">

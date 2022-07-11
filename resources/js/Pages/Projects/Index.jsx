@@ -7,8 +7,6 @@ function StatusMenu({ statuses, project }) {
   const [isOpen, setIsOpen] = useState(false);
   const form = useForm({ status: project.status });
 
-  //TODO TRY A SIMPLE FETCH API CALL
-
   function handleInputChange(e) {
     console.log(e.target.value);
     form.setData((v) => ({ ...v, status: e.target.value }));
@@ -40,8 +38,7 @@ const ProjectsIndex = ({ projects, statuses }) => {
     <>
       <Head title="Projects" />
       <PageTitle>Projects</PageTitle>
-      <div className="mb-4 flex items-center justify-between ">
-        <div>Placeholder</div>
+      <div className="mb-4 flex items-center justify-end">
         <Link as={"button"} className="btn-indigo" href={route("projects.create")}>
           Create Project
         </Link>

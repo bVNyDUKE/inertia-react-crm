@@ -1,5 +1,4 @@
 import { useForm } from "@inertiajs/inertia-react";
-import Authenticated from "@/Layouts/Authenticated";
 import PageTitle from "@/Components/PageTitle";
 import Input from "@/Components/Input";
 import CrumbsLink from "@/Components/CrumbsLink";
@@ -80,7 +79,5 @@ function EditProject({ project, clients, users, statuses }) {
     </>
   );
 }
-
-EditProject.layout = (page) => <Authenticated title="Projects">{page}</Authenticated>;
 
 export default EditProject;

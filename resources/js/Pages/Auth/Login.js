@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import Button from "@/Components/Breeze/Button";
 import Checkbox from "@/Components/Breeze/Checkbox";
 import Guest from "@/Layouts/Guest";
@@ -34,7 +34,7 @@ export default function Login({ status, canResetPassword }) {
     <Guest>
       <Head title="Log in" />
 
-      {status && <div className="mb-4 font-medium text-sm text-green-600">{status}</div>}
+      {status && <div className="mb-4 text-sm font-medium text-green-600">{status}</div>}
 
       <ValidationErrors errors={errors} />
 
@@ -66,7 +66,7 @@ export default function Login({ status, canResetPassword }) {
           />
         </div>
 
-        <div className="block mt-4">
+        <div className="mt-4 block">
           <label className="flex items-center">
             <Checkbox name="remember" value={data.remember} handleChange={onHandleChange} />
 
@@ -74,9 +74,9 @@ export default function Login({ status, canResetPassword }) {
           </label>
         </div>
 
-        <div className="flex items-center justify-end mt-4">
+        <div className="mt-4 flex items-center justify-end">
           {canResetPassword && (
-            <Link href={route("password.request")} className="underline text-sm text-gray-600 hover:text-gray-900">
+            <Link href={route("password.request")} className="text-sm text-gray-600 underline hover:text-gray-900">
               Forgot your password?
             </Link>
           )}
