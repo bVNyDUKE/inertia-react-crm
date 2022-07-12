@@ -1,10 +1,13 @@
+import "../css/app.css";
+
 import { render } from "react-dom";
 import { createInertiaApp } from "@inertiajs/inertia-react";
 import { InertiaProgress } from "@inertiajs/progress";
 
-import ZiggyRoute from "tightenco/ziggy/src/js";
+import ZiggyRoute from "../../vendor/tightenco/ziggy/src/js";
 import { Ziggy } from "./routes";
 import Authenticated from "./Layouts/Authenticated";
+import { resolvePageComponent } from "laravel-vite-plugin/inertia-helpers";
 
 window.route = (name, params) => ZiggyRoute(name, params, false, Ziggy);
 
@@ -12,8 +15,8 @@ const appName = window.document.getElementsByTagName("title")[0]?.innerText || "
 
 createInertiaApp({
   title: (title) => `${title} - ${appName}`,
-  resolve: (name) => {
-    const page = require(`./Pages/${name}`).default;
+  resolve: async (name) => {
+    const { default: page } = await resolvePageComponent(`./Pages/${name}.jsx`, import.meta.glob("./Pages/**/*.jsx"));
     if (!name.startsWith("Auth/")) {
       page.layout = page.layout || Authenticated;
     }
