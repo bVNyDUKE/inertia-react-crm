@@ -34,7 +34,7 @@
 **Debugging Errors**
 
 - [x] Debug tools
-  - [ ] Laravel Telescope
+  - [x] Laravel Telescope
   - [x] Debugbar
 - [ ] Try-Catch and Laravel Exceptions
 - [ ] Customizing Error Pages
