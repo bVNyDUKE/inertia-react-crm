@@ -1,66 +1,60 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+**Routing Advanced**
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+- [x] Route Model Binding in Resource Controllers
+- [x] Route Redirect - homepage should automatically redirect to the login form
 
-## About Laravel
+**Middleware**
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- [ ] Custom Middleware class (terms accepted)
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+**Database Advanced**
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- [x] Database Seeders and Factories - to automatically create first clients/projects/tasks and default users
+- [ ] Eloquent Query Scopes - show only active clients, for example
+- [ ] Polymorphic relationships with [Spatie Media Library package](https://github.com/spatie/laravel-medialibrary)
+- [ ] Eloquent Accessors and Mutators - view all date values in `m/d/Y` format
+- [ ] Soft Deletes on any Eloquent models
 
-## Learning Laravel
+**Auth Advanced**
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+- [ ] Authorization: Roles/Permissions (admin and simple users), Gates, Policies with [Spatie Permissions package](https://github.com/spatie/laravel-permission)
+- [x] Authentication: Email Verification
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+**File uploads Advanced**
 
-## Laravel Sponsors
+- [ ] Medialibrary, project intervention image
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+**API Basics**
 
-### Premium Partners
+- [ ] API Routes and Controllers
+- [ ] API Eloquent Resources
+- [ ] API Auth with Sanctum (Authenticate admin users to be able to manage other users)
+- [ ] Override API Error Handling and Status Codes
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[CMS Max](https://www.cmsmax.com/)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
-- **[Romega Software](https://romegasoftware.com)**
+**Debugging Errors**
 
-## Contributing
+- [x] Debug tools
+  - [ ] Laravel Telescope
+  - [x] Debugbar
+- [ ] Try-Catch and Laravel Exceptions
+- [ ] Customizing Error Pages
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+**Third party bug trackers**
 
-## Code of Conduct
+- [x] Rollbar
+- [x] Sentry
+- [x] Flare
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+**Sending Email**
 
-## Security Vulnerabilities
+- [ ] Mailables and Mail Facade (task assigned)
+- [ ] Notifications System: Email
+- [x] Mailtrap
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+**Extra**
 
-## License
+- [ ] Automated Tests for CRUD Operations
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+**Deployment**
+
+- [ ] Branches and github actions
