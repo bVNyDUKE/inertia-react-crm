@@ -28,11 +28,17 @@ class Project extends Model
         'deleted_at',
     ];
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<\App\Models\Client,\App\Models\Project>
+     */
     public function client()
     {
         return $this->belongsTo(Client::class);
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<\App\Models\User,\App\Models\Project>
+     */
     public function user()
     {
         return $this->belongsTo(User::class);

@@ -12,14 +12,17 @@ class Client extends Model
     protected $fillable = [
         'company',
         'vat',
-        'address'
+        'address',
     ];
 
     protected $hidden = [
         'created_at',
-        'updated_at'
+        'updated_at',
     ];
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany<\App\Models\Project>
+     */
     public function projects()
     {
         return $this->hasMany(Project::class);

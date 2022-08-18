@@ -8,12 +8,13 @@ use App\Models\Project;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rules\Enum;
+use Inertia\Inertia;
 
 class ProjectController extends Controller
 {
-    public function index()
+    public function index(): \Inertia\Response
     {
-        return inertia(
+        return Inertia::render(
             'Projects/Index',
             [
                 'projects' => Project::select('id', 'user_id', 'client_id', 'title', 'status')
@@ -25,9 +26,9 @@ class ProjectController extends Controller
         );
     }
 
-    public function create()
+    public function create(): \Inertia\Response
     {
-        return inertia(
+        return Inertia::render(
             'Projects/Create',
             [
                 'clients' => Client::select('id', 'company')->get(),
@@ -37,7 +38,7 @@ class ProjectController extends Controller
         );
     }
 
-    public function store(Request $request)
+    public function store(Request $request): \Illuminate\Http\RedirectResponse
     {
         $validated = $request->validate([
             'title' => 'required|max:255',
@@ -52,9 +53,9 @@ class ProjectController extends Controller
         return redirect()->route('projects.index')->with('success', 'Project saved');
     }
 
-    public function edit(Project $project)
+    public function edit(Project $project): \Inertia\Response
     {
-        return inertia(
+        return Inertia::render(
             'Projects/Edit',
             [
                 'project' => $project,
@@ -65,7 +66,7 @@ class ProjectController extends Controller
         );
     }
 
-    public function update(Request $request, Project $project)
+    public function update(Request $request, Project $project): \Illuminate\Http\RedirectResponse
     {
         $validated = $request->validate([
             'title' => 'max:255',
@@ -80,7 +81,7 @@ class ProjectController extends Controller
         return redirect()->back()->with('success', 'Project updated');
     }
 
-    public function destroy(Project $project)
+    public function destroy(Project $project): \Illuminate\Http\RedirectResponse
     {
         $project->delete();
 
