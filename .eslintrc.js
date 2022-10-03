@@ -21,6 +21,7 @@ module.exports = {
     eqeqeq: "error",
     "no-console": 0,
     "react/prop-types": 0,
+    semi: 2,
   },
   settings: {
     react: {

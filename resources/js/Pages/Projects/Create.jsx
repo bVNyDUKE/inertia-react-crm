@@ -12,6 +12,8 @@ function CreateProject({ clients, users, statuses }) {
     description: "",
   });
 
+  form.transform((data) => ({ ...data, addedProperty: true }));
+
   const handleInputChange = (e) => {
     if (form.data[e.target.name] !== e.target.value) {
       form.clearErrors(e.target.name);

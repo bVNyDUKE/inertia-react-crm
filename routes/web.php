@@ -6,7 +6,7 @@ use App\Models\Project;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
-Route::group(['middleware' => ['auth', 'verified']], function () {
+Route::group(['middleware' => ['auth', 'verified', 'terms.accepted']], function () {
     Route::apiResources(['clients' => ClientController::class]);
     Route::resource('projects', ProjectController::class);
     Route::get('/', fn () => Inertia::render('Dashboard'))->name('dashboard');
