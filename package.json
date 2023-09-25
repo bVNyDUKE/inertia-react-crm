@@ -8,9 +8,6 @@
   "devDependencies": {
     "@babel/preset-react": "^7.16.7",
     "@headlessui/react": "^1.4.2",
-    "@inertiajs/inertia": "^0.11.1",
-    "@inertiajs/inertia-react": "^0.8.1",
-    "@inertiajs/progress": "^0.2.6",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.4",
     "@tailwindcss/forms": "^0.4.0",
     "@vitejs/plugin-react": "^3.0.1",
@@ -33,6 +30,7 @@
     "vite": "^4.0.0"
   },
   "dependencies": {
+    "@inertiajs/react": "^1.0.0",
     "react-toastify": "^8.2.0"
   }
 }

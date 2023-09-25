@@ -1,10 +1,10 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import Button from "@/Components/Breeze/Button";
 import Guest from "@/Layouts/Guest";
 import Input from "@/Components/Breeze/Input";
 import Label from "@/Components/Breeze/Label";
 import ValidationErrors from "@/Components/Breeze/ValidationErrors";
-import { Head, useForm } from "@inertiajs/inertia-react";
+import { Head, useForm } from "@inertiajs/react";
 
 export default function ResetPassword({ token, email }) {
   const { data, setData, post, processing, errors, reset } = useForm({
@@ -40,14 +40,7 @@ export default function ResetPassword({ token, email }) {
         <div>
           <Label forInput="email" value="Email" />
 
-          <Input
-            type="email"
-            name="email"
-            value={data.email}
-            className="mt-1 block w-full"
-            autoComplete="username"
-            handleChange={onHandleChange}
-          />
+          <Input type="email" name="email" value={data.email} className="mt-1 block w-full" autoComplete="username" handleChange={onHandleChange} />
         </div>
 
         <div className="mt-4">
@@ -77,7 +70,7 @@ export default function ResetPassword({ token, email }) {
           />
         </div>
 
-        <div className="flex items-center justify-end mt-4">
+        <div className="mt-4 flex items-center justify-end">
           <Button className="ml-4" processing={processing}>
             Reset Password
           </Button>

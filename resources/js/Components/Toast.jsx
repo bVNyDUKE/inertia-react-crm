@@ -1,4 +1,4 @@
-import { usePage } from "@inertiajs/inertia-react";
+import { usePage } from "@inertiajs/react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.min.css";
 

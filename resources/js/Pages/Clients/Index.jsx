@@ -1,5 +1,5 @@
 import { useRef, useEffect, useState } from "react";
-import { Head, useForm } from "@inertiajs/inertia-react";
+import { Head, useForm } from "@inertiajs/react";
 
 import Table from "@/Components/Table";
 import Modal from "@/Components/Modal";

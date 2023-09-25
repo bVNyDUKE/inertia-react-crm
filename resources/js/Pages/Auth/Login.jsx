@@ -5,7 +5,7 @@ import Guest from "@/Layouts/Guest";
 import Input from "@/Components/Breeze/Input";
 import Label from "@/Components/Breeze/Label";
 import ValidationErrors from "@/Components/Breeze/ValidationErrors";
-import { Head, Link, useForm } from "@inertiajs/inertia-react";
+import { Head, Link, useForm } from "@inertiajs/react";
 
 export default function Login({ status, canResetPassword }) {
   const { data, setData, post, processing, errors, reset } = useForm({

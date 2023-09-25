@@ -1,4 +1,4 @@
-import { Link } from "@inertiajs/inertia-react";
+import { Link } from "@inertiajs/react";
 import Icon from "@/Components/Icons";
 
 const MenuItem = ({ routeName, label, icon, href = null }) => {

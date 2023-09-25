@@ -1,6 +1,6 @@
 import Dropdown from "@/Components/Breeze/Dropdown";
 
-import { usePage } from "@inertiajs/inertia-react";
+import { usePage } from "@inertiajs/react";
 
 function UserDropdown() {
   const { props } = usePage();

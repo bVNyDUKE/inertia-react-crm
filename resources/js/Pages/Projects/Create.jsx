@@ -1,4 +1,4 @@
-import { Head, useForm } from "@inertiajs/inertia-react";
+import { Head, useForm } from "@inertiajs/react";
 import PageTitle from "@/Components/PageTitle";
 import Input from "@/Components/Input";
 import CrumbsLink from "@/Components/CrumbsLink";

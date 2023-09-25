@@ -1,6 +1,6 @@
 import Button from "@/Components/Button";
 import Guest from "@/Layouts/Guest";
-import { useForm } from "@inertiajs/inertia-react";
+import { useForm } from "@inertiajs/react";
 
 export default function Terms() {
   const { data, setData, post, errors } = useForm({

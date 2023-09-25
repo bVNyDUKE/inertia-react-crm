@@ -1,4 +1,4 @@
-import { Link } from "@inertiajs/inertia-react";
+import { Link } from "@inertiajs/react";
 
 function Pagination({ paginator }) {
   const { from, to, links: allLinks, prev_page_url: previous, next_page_url: next, total } = paginator;

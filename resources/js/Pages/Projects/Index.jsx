@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Head, Link, useForm } from "@inertiajs/inertia-react";
+import { Head, Link, useForm } from "@inertiajs/react";
 import Table from "@/Components/Table";
 import PageTitle from "@/Components/PageTitle";
 
